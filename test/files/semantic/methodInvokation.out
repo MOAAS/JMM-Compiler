@@ -1,0 +1,24 @@
+Warning: Duplicate import declaration "io.println(int)" at line 2, column 1.
+Error: Variable "c" has not been initialized at line 23, column 20.
+Error: Symbol "d" does not exist at line 23, column 23.
+Error: Right operand of + is not an int. Found: boolean at line 25, column 17.
+Error: Symbol "verySimpleVar" does not exist at line 26, column 13.
+Error: Symbol "verySimpleVar" does not exist at line 27, column 9.
+Error: Class "int" does not contain method "add(int,int)" at line 29, column 9.
+Error: Symbol "person" does not exist at line 31, column 13.
+Error: Class "Simple" does not contain method "func0()" at line 31, column 27.
+Error: Symbol "noSymbol1" does not exist at line 31, column 54.
+Error: Symbol "noSymbol2" does not exist at line 31, column 78.
+Error: Class "Simple" does not contain method "func3()" at line 31, column 90.
+Error: Tried to call ".length" on non array. Found type: Simple at line 31, column 110.
+Error: Class "Simple" does not contain method "func4(int,int)" at line 31, column 137.
+Error: Symbol "simpleVar" does not exist at line 33, column 9.
+Error: Variable "c" has not been initialized at line 35, column 20.
+Error: Class "Simple" does not contain static method "add(int,int,int)" at line 36, column 9.
+Error: Method "Simple.add(int,int)" is not static at line 37, column 9.
+Error: Simple is not valid as a method argument (of function "simple1") at line 38, column 20.
+Error: Quicksort is not valid as a method argument (of function "quicksort1") at line 39, column 23.
+Error: Method "Simple.do()" is static at line 43, column 9.
+Error: Invalid return expression. Required: Simple, Provided: class at line 49, column 16.
+Error: Invalid return expression. Required: Quicksort, Provided: class at line 53, column 16.
+Error: Invalid return expression. Required: int, Provided: boolean at line 57, column 16.

@@ -1,0 +1,14 @@
+Warning: Duplicate import declaration "io.println(int)" at line 5, column 1.
+Warning: Duplicate import declaration "io.println(int)" at line 6, column 1.
+Warning: Duplicate import declaration "io.println(int)" at line 7, column 1.
+Warning: Duplicate import declaration "Quicksort" at line 10, column 1.
+Error: Invalid import declaration "Package", constructor cannot be static, at line 12, column 1.
+Error: Invalid import declaration "Package(int,boolean)", constructor cannot be static, at line 13, column 1.
+Error: Invalid import declaration "Package", constructor cannot return a value, at line 15, column 1.
+Error: Invalid import declaration "Package(int,boolean)", constructor cannot return a value, at line 16, column 1.
+Error: Duplicate method variable name "a" at line 29, column 35.
+Error: Duplicate method variable name "a" at line 29, column 44.
+Error: Duplicate method declaration "add(int,boolean,int[])" at line 33, column 16.
+Error: Duplicate method declaration "add(int,int)" at line 41, column 16.
+Error: Duplicate method declaration "add(int,int)" at line 45, column 20.
+Error: Duplicate method declaration "add(int,int)" at line 49, column 18.

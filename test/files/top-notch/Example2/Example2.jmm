@@ -1,0 +1,98 @@
+import io;
+import static io.println(int);
+
+import io2;
+import io2.println(int);
+
+import static ioPlus.requestNumber() int;
+
+class Example2 extends io2 {
+
+	public static void main(String[] args) {
+	    Example2 io;
+
+	    io = new Example2();
+
+	    io.println(1500);
+
+	    io.println(io.calculate2DOctant(ioPlus.requestNumber(), ioPlus.requestNumber()));
+
+	    io.println(io.calculateFactorial(ioPlus.requestNumber()));
+
+	    io.printArray(io.createArray(ioPlus.requestNumber()));
+	}
+
+	public int calculate2DOctant(int x, int y) {
+	    int result;
+
+        if (x < 0) {
+            if (y < 0) {
+                if (y < x) {
+                    result = 6;
+                }
+                else result = 5;
+            }
+            else if (y < 0 - x) {
+                result = 4;
+            }
+            else result = 3;
+        }
+        else if (y < 0) {
+             if (y < 0 - x)
+                result = 7;
+             else result = 8;
+        }
+        else if (y < x)
+            result = 1;
+        else {
+           result = 2;
+        }
+
+	    io.println(result);
+
+	    return result;
+	}
+
+	public int calculateFactorial(int number) {
+        int result;
+        result = 1;
+
+        while (0 < number) {
+            result = result * number;
+            number = number - 1;
+        }
+
+
+        return result;
+	}
+
+	public int[] createArray(int size) {
+        return this.fillArray(new int[size]);
+	}
+
+	public int[] fillArray(int[] array) {
+
+	    int i;
+	    i = 0;
+	    while (i < array.length) {
+            array[i] = ioPlus.requestNumber();
+	        i = i + 1;
+	    }
+
+	    return array;
+
+	}
+
+	public int printArray(int[] array) {
+	    int i;
+	    i = 0;
+	    while (i < array.length) {
+	        io.println(array[i]);
+	        i = i + 1;
+	    }
+
+	    return 0;
+	}
+
+
+}

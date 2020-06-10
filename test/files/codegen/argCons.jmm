@@ -1,0 +1,17 @@
+import IntStorer;
+import IntStorer(int);
+import IntStorer.print();
+
+class ArgConsTester {
+    public static void main(String[] args) {
+        IntStorer intstorer;
+
+        intstorer = new IntStorer(10);
+
+        intstorer.print();
+
+        intstorer = new IntStorer();
+
+        intstorer.print();
+    }
+}

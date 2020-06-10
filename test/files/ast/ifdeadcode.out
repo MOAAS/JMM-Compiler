@@ -1,0 +1,21 @@
+Program
+ ClassDeclaration
+  ClassInfo
+   IfDeadCode
+  RegularMethodDeclaration
+   MethodType
+    boolean
+   MethodName
+    veryComplexCalculation
+   MethodVars
+   Return
+    True
+  MainDeclaration
+   ArgName
+    args
+   MethodContent
+    Dot
+     io
+     DotArgs
+      println
+      1

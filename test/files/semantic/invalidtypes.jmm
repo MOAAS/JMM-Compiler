@@ -1,0 +1,30 @@
+import io.println(int) void;
+import Quicksort;
+
+//class Simple extends Simple {
+class Simple extends Quicksort {
+    Simple a;
+    Quicksort b;
+    invalidfieldtype c;
+
+    public static void main(String[] arg){
+        Simple a;
+        Quicksort b;
+        quicksort c;
+        simple d;
+        Int e;
+        Boolean f;
+
+        int g;
+        int[] h;
+        boolean i;
+    }
+
+    public invalidreturntype fun(invalidparam1 arg1, invalidparam2 arg2) {
+        return a;
+    }
+
+    public invalidreturntype2 fun(invalidparam3 arg1, invalidparam4 arg2) {
+        return a;
+    }
+ }

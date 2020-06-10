@@ -1,0 +1,31 @@
+import io;
+import static io.println(int);
+
+class SmallOptimizations {
+	public static void main(String[] args) {
+	    int a;
+	    SmallOptimizations obj;
+
+	    obj = new SmallOptimizations();
+	    a = obj.double(1);
+
+	    io.println(obj.negate(10));
+	    io.println(obj.double(10));
+	    io.println(a * 10);
+	    io.println(a * 4);
+	    io.println(a * 16 + 1);
+
+	    a = obj.double(30);
+
+	    io.println(a / 32 - a * 64);
+	}
+
+
+	public int negate(int num) {
+	    return 0 - num;
+	}
+
+    public int double(int num) {
+        return num * 2;
+    }
+}

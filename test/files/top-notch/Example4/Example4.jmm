@@ -1,0 +1,49 @@
+import static ioPlus.requestNumber() int;
+
+import static io2.println(boolean);
+
+import static io.println(int);
+
+class Example4 {
+    public static void main(String[] args) {
+        int possiblePrime;
+        int i;
+        boolean isPrime;
+        Example4 calculator;
+
+        calculator = new Example4();
+        possiblePrime = ioPlus.requestNumber();
+        i = 2;
+        isPrime = true;
+
+        while(i < possiblePrime) {
+            if(calculator.isDivisibleBy(possiblePrime, i)) {
+                isPrime = false;
+                i = possiblePrime;
+            } else {
+                i = i + 1;
+            }
+        }
+
+        io2.println(isPrime);
+    }
+
+    public boolean isDivisibleBy(int number, int divisor) {
+        int i;
+        boolean isDivisible;
+
+        isDivisible = false;
+        i = divisor;
+
+        //while(i <= number)
+        while(!(!(i < number) && !(!(i < number) && !(number < i)))) {
+            if(!(i < number) && !(number < i)) {
+                isDivisible = true;
+                i = number + 1;
+            } else {
+                i = i + divisor;
+            }
+        }
+        return isDivisible;
+    }
+}

@@ -1,0 +1,7 @@
+Error: Variable "g" has not been initialized at line 23, column 31.
+Error: Variable "simp2" has not been initialized at line 29, column 17.
+Error: Variable "e" has not been initialized at line 37, column 25.
+Warning: Variable "c" may not have been initialized at line 40, column 13.
+Warning: Variable "g" may not have been initialized at line 42, column 13.
+Error: Variable "x" has not been initialized at line 47, column 11.
+Error: Variable "a" has not been initialized at line 48, column 11.

@@ -1,0 +1,3 @@
+Error: Cannot use "this" in static function at line 16, column 17.
+Error: Cannot use "this" in static function at line 18, column 15.
+Error: Cannot use "this" in static function at line 18, column 37.

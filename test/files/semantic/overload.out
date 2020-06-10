@@ -1,0 +1,2 @@
+Error: Class "Simple" does not contain method "foo(int,int)" at line 9, column 9.
+Error: Class "Simple" does not contain method "foo(int,boolean)" at line 11, column 9.

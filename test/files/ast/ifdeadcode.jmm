@@ -1,0 +1,49 @@
+class IfDeadCode {
+	public boolean veryComplexCalculation() {
+	    return true;
+	}
+
+	public static void main(String[] args) {
+        if(1 < 2 && !(5 * 2 + 1 < 10)) // true
+            io.println(1);
+        else { // else ignorado
+            io.println(999); io.println(999); io.println(999); io.println(999); io.println(999); io.println(999);
+            io.println(999); io.println(999); io.println(999); io.println(999); io.println(999); io.println(999);
+            io.println(999); io.println(999); io.println(999); io.println(999); io.println(999); io.println(999);
+            io.println(999); io.println(999); io.println(999); io.println(999); io.println(999); io.println(999);
+            io.println(999); io.println(999); io.println(999); io.println(999); io.println(999); io.println(999);
+        }
+
+        // Tudo a partir daqui é ignorado
+
+        // ultima instrução é io.println(1)
+        while(false) { // tudo ignorado
+            io.println(999); io.println(999); io.println(999); io.println(999); io.println(999); io.println(999);
+            io.println(999); io.println(999); io.println(999); io.println(999); io.println(999); io.println(999);
+            io.println(999); io.println(999); io.println(999); io.println(999); io.println(999); io.println(999);
+            io.println(999); io.println(999); io.println(999); io.println(999); io.println(999); io.println(999);
+            io.println(999); io.println(999); io.println(999); io.println(999); io.println(999); io.println(999);
+        }
+
+        if (new IfDeadCode().veryComplexCalculation()) { }
+        else { }
+
+        if (true && 1 < 2) { }
+        else {
+            io.println(999); io.println(999); io.println(999); io.println(999); io.println(999); io.println(999);
+            io.println(999); io.println(999); io.println(999); io.println(999); io.println(999); io.println(999);
+            io.println(999); io.println(999); io.println(999); io.println(999); io.println(999); io.println(999);
+            io.println(999); io.println(999); io.println(999); io.println(999); io.println(999); io.println(999);
+            io.println(999); io.println(999); io.println(999); io.println(999); io.println(999); io.println(999);
+        }
+
+        if (true && !(1 < 2)) {
+            io.println(999); io.println(999); io.println(999); io.println(999); io.println(999); io.println(999);
+            io.println(999); io.println(999); io.println(999); io.println(999); io.println(999); io.println(999);
+            io.println(999); io.println(999); io.println(999); io.println(999); io.println(999); io.println(999);
+            io.println(999); io.println(999); io.println(999); io.println(999); io.println(999); io.println(999);
+            io.println(999); io.println(999); io.println(999); io.println(999); io.println(999); io.println(999);
+        }
+        else { }
+	}
+}

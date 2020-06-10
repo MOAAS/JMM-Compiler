@@ -1,0 +1,19 @@
+import static io.println(int);
+
+class Gamer {
+    public static void main(String[] args) {
+        io.println(new Gamer().soManyRegisters(true));
+    }
+
+    public int soManyRegisters(boolean gamer){
+       int a;
+       int b;
+       int c;
+       int d;
+       a = 0;
+       b = a;
+       c = b;
+       d = c;
+       return d;
+    }
+}

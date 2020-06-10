@@ -1,0 +1,56 @@
+import io.println(int) void;
+import Quicksort;
+import List;
+import List(int);
+
+class Simple extends Quicksort{
+    int simpleVar;
+
+    public static void main(String[] arg){
+        int a;
+        int b;
+        int c;
+        int d;
+        int e;
+        int z;
+        boolean g;
+        boolean h;
+        Simple simp1;
+        Simple simp2;
+        List list;
+        a = 1;
+        simp1 = new Simple();
+        if(simp1.getBool() && g){
+            b = 2;
+            d = 4;
+        } else {
+            b = 3;
+            c = 3;
+            if(!simp2.getBool())
+                 d = 4;
+            else d = 4;
+        }
+
+        while(true){
+         g = false;
+        }
+        list = new List(e);
+        e = a;
+        e = b;
+        e = c;
+        e = d;
+        h = g;
+    }
+    public int getInt(int i){
+      int x;
+      int a;
+      a = x;
+      x = a;
+      x = i;
+      return x;
+    }
+
+    public boolean getBool(){
+      return true;
+    }
+ }

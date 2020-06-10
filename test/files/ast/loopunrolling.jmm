@@ -1,0 +1,44 @@
+import static io.println(int);
+
+class LoopUnrolling {
+	public static void main(String[] args) {
+	    int[] array;
+	    int i;
+
+	    array = new int[100];
+	    i = 0;
+	    while (i < 100) {
+	        array[i] = i;
+	        i = i + 1;
+	    }
+
+        i = 0;
+	    while (i < 100) {
+	        io.println(array[i]);
+	        i = i + 1;
+	    }
+
+        i = 3;
+	    while (i < 20) {
+	        io.println(array[i]);
+	        i = i + 2;
+	    }
+
+	   	/*
+            while (i < 100) {
+                io.println(array[i]);
+                i = i + 1;
+                io.println(array[i]);
+                i = i + 1;
+                io.println(array[i]);
+                i = i + 1;
+                io.println(array[i]);
+                i = i + 1;
+                io.println(array[i]);
+                i = i + 1;
+            }
+	    */
+
+
+	}
+}

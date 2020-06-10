@@ -1,0 +1,11 @@
+Error: Invalid variable type: "invalidfieldtype" at line 8, column 5.
+Error: Invalid variable type: "quicksort" at line 13, column 9.
+Error: Invalid variable type: "simple" at line 14, column 9.
+Error: Invalid variable type: "Int" at line 15, column 9.
+Error: Invalid variable type: "Boolean" at line 16, column 9.
+Error: Invalid variable type: "invalidparam1" at line 23, column 34.
+Error: Invalid variable type: "invalidparam2" at line 23, column 54.
+Error: Invalid variable type: "invalidreturntype" at line 23, column 12.
+Error: Invalid variable type: "invalidparam3" at line 27, column 35.
+Error: Invalid variable type: "invalidparam4" at line 27, column 55.
+Error: Invalid variable type: "invalidreturntype2" at line 27, column 12.

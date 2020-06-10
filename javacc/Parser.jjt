@@ -1,0 +1,421 @@
+options {
+    LOOKAHEAD=1;
+    MULTI=true;
+}
+
+PARSER_BEGIN(JavaMMParser)
+    import java.io.FileInputStream;
+    import java.io.File;
+
+    public class JavaMMParser {
+    private int nErrors = 0;
+    private static int MAX_ERRORS = 10;
+
+    public static void main(String args[]) throws Exception{ }
+
+    void whileErrorHandler(ParseException parseException) {
+      Token failedToken = parseException.currentToken.next;
+      System.err.println("Parse Error found on while expression: line " + failedToken.beginLine + ", column " + failedToken.beginColumn + ".");
+      System.err.println("Error Details:");
+
+      int[][] expectedTokenSequences = parseException.expectedTokenSequences;
+      int error = errorType(expectedTokenSequences);
+      switch (error) {
+          case 0: //Missing Left Parenthesis
+              System.err.println("\tThe expression is missing a '(' after the while keyword.");
+              break;
+          case 1: //Missing Right Parenthesis
+              System.err.println("\tThe expression is missing a ')' at the end.");
+              break;
+          case 2: //Missing comparison argument after operator
+              System.err.println("\tThe expression is missing an argument after the operator " + parseException.tokenImage[getToken(0).kind]);
+              break;
+          case 3: //Missing comparison argument before operator
+              System.err.println("\tThe expression is missing an argument before the operator " + parseException.tokenImage[getToken(1).kind]);
+              break;
+          case 4: //Invalid expression
+              System.err.println("\tThe expression value is invalid! An " + parseException.tokenImage[getToken(1).kind] + " is not valid in this context.");
+              break;
+          case 5: //empty expression
+              System.err.println("\tThe expression cannot be empty.");
+              break;
+          case 6: //missing ]
+              System.err.println("\tThe expression is missing a closing bracket ']'");
+              break;
+      }
+      System.err.println("");
+
+      whileErrorRecovery();
+   }
+
+    int errorType(int[][] expectedTokenSequences){
+        int[] operatorTokens = {LESSTHAN, PLUS, MINUS, TIMES, DIV, AND};
+        Token t = getToken(0); //Gets the current token we're at (before the error)
+        Token t1 = getToken(1); //Gets the next token (the error)
+
+        //Check for missing argument
+        if(t.kind == NOT || inArray(t.kind, operatorTokens)) { //If current is a not or an operator
+            if(inArray(t1.kind, operatorTokens) || t1.kind == RPAR) return 2; // if error token is an operator or ")", then Missing argument after operator error
+            return 4; //if the error isn't an operator, then it's an Invalid expression error
+        }
+        else if(inArray(t1.kind, operatorTokens)) { //if error is an operator and the current token isn't
+            return 3; //Missing argument before operator error
+        }
+
+        //Check for missing Parenthesis
+        else if(t.kind == WHILE) return 0; //Missing starting Parenthesis
+        else if(t1.kind == LBRACE) return 1; //If the current isn't an operator or while and the error is the "{" then ")" is missing, Missing ")" error
+
+        //Check for empty expression
+        else if(t.kind == LPAR && t1.kind == RPAR) return 5; //Empty expression error
+        else if(t1.kind == RPAR) {
+            for(int i = 0; i < expectedTokenSequences.length; i++) {
+                for(int j = 0; j < expectedTokenSequences[i].length; j++) {
+                    if(expectedTokenSequences[i][j] == RBRACKET) return 6;  //if one of the possible tokens was a closing bracket then throw that error
+                }
+            }
+        }
+        return 4; //If none of the above then it is an invalid expression error
+    }
+
+    boolean inArray(int item, int[] array) {
+       for (int element : array) {
+           if (element == item) {
+               return true;
+           }
+       }
+       return false;
+    }
+
+    void whileErrorRecovery() {
+        Token t = getToken(0); //Gets the current token we're at (before the error)
+        do { //Get to a safe zone to recover
+            if(t.kind == RPAR && getToken(1).kind != RPAR) //if we've reached the last ")"
+              return;
+            else if(getToken(1).kind == LBRACE) //If there was no ")" but the next token is "{"
+              return;
+
+            t = getNextToken();
+        } while (true);
+    }
+}
+
+PARSER_END(JavaMMParser)
+   SKIP :
+   {
+      " "
+      | "\n"
+      | "\r"
+      | "\t"
+      |  <"//" (~["\n","\r"])* ("\n" | "\r" | "\r\n")>
+      |  <"/*" (~["*"])* "*" ("*" | ~["*","/"] (~["*"])* "*")* "/">
+   }
+   TOKEN:
+   {
+     < IMPORT: "import" >
+     | < CLASS: "class" >
+     | < THIS: "this" >
+     | < EXTENDS: "extends" >
+     | < PUBLIC: "public" >
+     | < STATIC: "static" >
+     | < MAIN: "main" >
+     | < VOID: "void" >
+     | < STRING: "String" >
+     | < RETURN: "return" >
+     | < IF: "if" >
+     | < ELSE: "else" >
+     | < WHILE: "while" >
+     | < INT: "int" >
+     | < BOOLEAN: "boolean" >
+     | < TRUE: "true" >
+     | < FALSE: "false" >
+     | < LENGTH: "length" >
+     | < NEW: "new" >
+     | < AND: "&&" >
+     | < NOT: "!" >
+     | < LESSTHAN: "<" >
+     | < PLUS: "+" >
+     | < MINUS: "-" >
+     | < TIMES: "*" >
+     | < DIV: "/" >
+     | < DOT: "." >
+     | < EQUAL: "=" >
+     | < LBRACE: "{" >
+     | < RBRACE: "}" >
+     | < LPAR: "(" >
+     | < RPAR: ")" >
+     | < LBRACKET: "[" >
+     | < RBRACKET: "]" >
+     | < COMMA: "," >
+     | < SEMICOLON: ";" >
+     | < INTEGER: ("0" | ["1"-"9"](["0"-"9"])*) >
+     | < IDENTIFIER: (["A"-"Z"] | ["a"-"z"] | "_" | "$")(["0"-"9"] | ["A"-"Z"] | ["a"-"z"] | "_" | "$")* >
+
+
+   }
+
+   ASTProgram Program(): { }
+   {
+     //  Expression()  <LF> {return jjtThis;}
+        ImportDeclaration()
+        ClassDeclaration()
+        {
+           if (nErrors > 0)
+               throw new RuntimeException("Error parsing file: " + nErrors + " Errors.");
+           return jjtThis;
+        }
+   }
+
+   void ImportDeclaration() #void: {Token importStart;}
+   {
+    (importStart=<IMPORT> ImportLifetime() ImportName() ImportArgs() ImportType() <SEMICOLON> {jjtThis.line = importStart.beginLine; jjtThis.column = importStart.beginColumn;} #ImportDeclaration(4))*
+   }
+
+   void ImportLifetime(): {} {
+    [<STATIC> {jjtThis.isStatic = true; }]
+   }
+
+   void ImportName(): {} {
+        Identifier() [<DOT> {jjtThis.isMethod = true; } Identifier()]
+   }
+
+   void ImportArgs(): {} {
+    [<LPAR> [Type() (<COMMA> Type())* | <VOID> {jjtThis.value = "void";}] <RPAR>]
+   }
+
+   void ImportType(): {}
+   {
+        [<VOID> {jjtThis.value = "void";} #Type | Type()]
+   }
+
+   void ClassDeclaration(): { }
+   {
+     <CLASS> ClassInfo() <LBRACE> (VarDeclaration())* (MethodDeclaration())* <RBRACE>
+   }
+
+   void ClassInfo(): {}
+   {
+        Identifier() [ <EXTENDS> Identifier() ]
+   }
+
+   void VarDeclaration() #void: { }
+   {
+     Type() Identifier() #VarDeclaration(2) <SEMICOLON>
+   }
+
+   Token Identifier() #void: {Token id;}
+   {
+        id=<IDENTIFIER> {jjtThis.value=id.image; jjtThis.line = id.beginLine; jjtThis.column = id.beginColumn;} #Identifier
+        {return id;}
+   }
+
+   void MethodDeclaration() #void: { }
+   {
+     <PUBLIC> (RegularMethodDeclaration() | MainDeclaration())
+   }
+
+   void MainDeclaration() : {}
+   {
+        <STATIC> <VOID> <MAIN> <LPAR> <STRING> <LBRACKET> <RBRACKET> Identifier() #ArgName(1) <RPAR> <LBRACE>  [MethodContent() #MethodContent] <RBRACE>
+   }
+
+  void RegularMethodDeclaration()  : {}
+  {
+      MethodType() MethodName() <LPAR> MethodVars() <RPAR> <LBRACE> [MethodContent() #MethodContent] <RETURN> Expression() #Return(1) <SEMICOLON> <RBRACE>
+  }
+
+  void MethodType() : {} {
+    Type()
+  }
+
+  void MethodName() : {} {
+    Identifier()
+  }
+
+  void MethodVars() : {} {
+    [ MethodVar() (<COMMA> MethodVar())* ]
+  }
+
+  void MethodVar() #void: { }
+  {
+    Type() Identifier() #MethodVar(2)
+  }
+
+   void MethodContent() #void: {}
+   {
+        // Esta produção seria:
+        // (VarDeclaration())* (Statement())*
+        Identifier() (Identifier() <SEMICOLON> #VarDeclaration(2) [MethodContent()] | StatementIdentifier() (Statement())*) |
+        TypeNotIdentifier() Identifier() <SEMICOLON> #VarDeclaration(2) [MethodContent()] |
+        StatementNotIdentifier() (Statement())*
+   }
+
+   void Type() #void: {Token id;}
+   {
+        TypeNotIdentifier() |
+        id=<IDENTIFIER> {jjtThis.value = id.image; jjtThis.line = id.beginLine; jjtThis.column = id.beginColumn;} #Type
+   }
+
+   void TypeNotIdentifier() #Type: {Token type;}
+   {
+        type=<INT> {jjtThis.value = "int"; jjtThis.line = type.beginLine; jjtThis.column = type.beginColumn;} [<LBRACKET> <RBRACKET> {jjtThis.array = true;}] |
+        type=<BOOLEAN> {jjtThis.value = "boolean"; jjtThis.line = type.beginLine; jjtThis.column = type.beginColumn;}
+   }
+
+   void Statement() #void: {}
+   {
+      StatementNotIdentifier() |
+      Identifier() StatementIdentifier()
+   }
+
+   void StatementNotIdentifier() #void : {}
+   {
+      <LBRACE> (Statement())* #CodeBlock <RBRACE> |
+      IfStatement() |
+      WhileStatement() |
+      ExpressionNoID() <SEMICOLON>
+
+      // Sem LL(1) seria:
+      // Expression() <SEMICOLON>
+   }
+
+   void IfStatement() #void : { Token ifExprStart; }
+   {
+      <IF> ifExprStart = <LPAR> Expression() <RPAR> Statement() <ELSE> Statement() {jjtThis.line = ifExprStart.beginLine; jjtThis.column = ifExprStart.beginColumn; } #If(3)
+
+
+
+   }
+
+   void WhileStatement() #void: { Token whileExprStart; }
+   {
+      whileExprStart = <WHILE>
+      try {
+         whileExprStart = <LPAR> Expression() <RPAR>
+      }
+      catch (ParseException parseException) {
+             whileErrorHandler(parseException);
+             nErrors++;
+             if (nErrors > MAX_ERRORS) {
+               // System.out.println("Reached maximum number of errors (" + MAX_ERRORS + "). Terminating.");
+                throw new RuntimeException("Reached maximum number of errors (" + MAX_ERRORS + "). Terminating.");
+             }
+      }
+      Statement() {jjtThis.line = whileExprStart.beginLine; jjtThis.column = whileExprStart.beginColumn; } #While(2)
+   }
+
+   void StatementIdentifier() #void : {Token t;}
+   {
+        <EQUAL> Expression() <SEMICOLON> #Assignment(2)  |
+        t=<LBRACKET> Expression() <RBRACKET> #Access(2) (<EQUAL> Expression() #Assignment(2) | (<LBRACKET>  Expression() <RBRACKET> #Access(2) | <DOT> DotArgs() {jjtThis.line = t.beginLine; jjtThis.column = t.beginColumn;} #Dot(2))*) <SEMICOLON>|
+        [ExpressionNoBracket()] <SEMICOLON>
+
+        // Sem LL(1) poderia ser:
+        // <EQUAL> Expression() <SEMICOLON> |
+        // <LBRACKET> Expression() <RBRACKET> <EQUAL> Expression() <SEMICOLON>
+   }
+
+   void Expression() #void: {}
+   {
+        LogicalExpr()
+   }
+
+   void LogicalExpr() #void : {}
+   {
+        CompareExpr() (<AND> CompareExpr() #And(2))*
+   }
+
+   void CompareExpr() #void : {}
+   {
+        SumExpr() (<LESSTHAN> SumExpr() #LessThan(2))*
+   }
+
+   void SumExpr() #void : {}
+   {
+        ProductExpr() (<PLUS> ProductExpr() #Add(2)| <MINUS> ProductExpr() #Sub(2))*
+   }
+
+   void ProductExpr() #void : {}
+   {
+        NotExpr() (<TIMES> NotExpr() #Mul(2)| <DIV> NotExpr() #Div(2))*
+   }
+
+   void NotExpr() #void : {}
+   {
+        AccessExpr() | (<NOT> NotExpr() #Not(1))
+   }
+
+   void AccessExpr() #void : {Token t;}
+   {
+        t=TerminalExpr() ((<LBRACKET> Expression() <RBRACKET> #Access(2)| <DOT> DotArgs() {jjtThis.line = t.beginLine; jjtThis.column = t.beginColumn;} #Dot(2)))*
+   }
+
+   void DotArgs(): {}
+   {
+     <LENGTH> #Length |
+     Identifier() <LPAR> [Expression() ( <COMMA> Expression())* ] <RPAR>
+   }
+
+   Token TerminalExpr() #void: {Token t;}
+   {
+        t=<INTEGER> {jjtThis.value = t.image; jjtThis.line = t.beginLine; jjtThis.column = t.beginColumn;} #Integer {return t;} |
+        t=<TRUE> {jjtThis.line = t.beginLine; jjtThis.column = t.beginColumn;} #True {return t;} |
+        t=<FALSE> {jjtThis.line = t.beginLine; jjtThis.column = t.beginColumn;} #False {return t;} |
+        t=Identifier() {return t;} |
+        t=<THIS> {jjtThis.line = t.beginLine; jjtThis.column = t.beginColumn;} #This {return t;} |
+
+        t=<NEW> ExprNew() {return t;} |
+        t=<LPAR> Expression() <RPAR> {return t;}
+   }
+
+   void ExprNew() #void: {Token newStart;}
+   {
+        <INT> <LBRACKET>  Expression() <RBRACKET> #ArrayInit(1) |
+        newStart=Identifier() ObjectInitArgs() {jjtThis.line = newStart.beginLine; jjtThis.column = newStart.beginColumn;} #ObjectInit(2)
+   }
+
+   void ObjectInitArgs(): {}
+   {
+       <LPAR> [Expression() ( <COMMA> Expression())*]  <RPAR>
+   }
+
+/// ****** Expression No ID at start ******* ///
+   void ExpressionNoID() #void : {}
+   {
+        (AccessExprNoID() | (<NOT> NotExpr() #Not(1)))
+            ((<TIMES> NotExpr() #Mul(2) | <DIV> NotExpr() #Div(2)))*
+            ((<PLUS> ProductExpr() #Add(2) | <MINUS> ProductExpr() #Sub(2)))*
+            (<LESSTHAN> SumExpr() #LessThan(2))*
+            (<AND> CompareExpr() #And(2))*
+   }
+
+   void AccessExprNoID() #void: {Token t;}
+   {
+         (t=<INTEGER> {jjtThis.value = t.image; jjtThis.line = t.beginLine; jjtThis.column = t.beginColumn;} #Integer |
+         t=<TRUE> {jjtThis.line = t.beginLine; jjtThis.column = t.beginColumn; }#True |
+         t=<FALSE> {jjtThis.line = t.beginLine; jjtThis.column = t.beginColumn;} #False |
+         t=<THIS> {jjtThis.line = t.beginLine; jjtThis.column = t.beginColumn;} #This |
+         t=<NEW> ExprNew() |
+         t=<LPAR> Expression() <RPAR>)
+         ((<LBRACKET> Expression() <RBRACKET> {jjtThis.line = t.beginLine; jjtThis.column = t.beginColumn;} #Access(2)| <DOT> DotArgs() {jjtThis.line = t.beginLine; jjtThis.column = t.beginColumn;} #Dot(2)))*
+   }
+
+/// ***** End No ID ****** ///
+
+/// ****** Expression but no bracket at start ******* ///
+   void ExpressionNoBracket() #void : {}
+   {
+        (AccessExprNoBracket() | (<NOT> NotExpr() #Not(1)))
+            ((<TIMES> NotExpr() #Mul(2) | <DIV> NotExpr() #Div(2)))*
+            ((<PLUS> ProductExpr() #Add(2) | <MINUS> ProductExpr() #Sub(2)))*
+            (<LESSTHAN> SumExpr() #LessThan(2))*
+            (<AND> CompareExpr() #And(2))*
+   }
+
+   void AccessExprNoBracket() #void: {Token t;}
+   {
+       t=<DOT> DotArgs()  {jjtThis.line = t.beginLine; jjtThis.column = t.beginColumn;} #Dot(2) ((<LBRACKET> Expression() <RBRACKET> #Access(2)| t=<DOT> DotArgs() {jjtThis.line = t.beginLine; jjtThis.column = t.beginColumn;} #Dot(2)))*
+   }
+
+/// ***** End No ID ****** ///
+

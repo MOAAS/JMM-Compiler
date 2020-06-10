@@ -1,0 +1,37 @@
+import io;
+import static io.println(int);
+import static io.println(boolean);
+
+import ArrayStorer;
+import ArrayStorer(int[]);
+import ArrayStorer(int[], int);
+import ArrayStorer.getArray() int[];
+import ArrayStorer.product() int;
+import ArrayStorer.sum() int;
+
+class Example1 {
+
+	public static void main(String[] args) {
+		ArrayStorer arrayStorer;
+
+		arrayStorer = new ArrayStorer(new int[5]);
+
+        new Example1().setIncreasing(arrayStorer.getArray());
+
+		io.println(arrayStorer.product()); // 5 * 4 * 3 * 2 * 1 = 120
+		io.println(arrayStorer.sum()); // 5 + 4 + 3 + 2 + 1 = 15
+
+		io.println(new ArrayStorer(new int[10], 10).sum()); // 10 + 10 + 10 + 10 + 10 + 10 + 10 + 10 + 10 + 10 = 100
+	}
+
+	public int[] setIncreasing(int[] array) {
+        int i;
+
+        i = 0;
+        while (i < array.length) {
+            array[i] = i + 1;
+            i = i + 1;
+        }
+        return array;
+	}
+}

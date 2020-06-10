@@ -1,0 +1,39 @@
+import static io.println(int);
+
+class Ropt1 {
+    public static void main(String[] args) {
+        io.println(new Ropt1().soManyRegisters(true));
+    }
+
+    public int soManyRegisters(boolean bool){
+       int a;
+       int b;
+       int c;
+       int d;
+       a = 0;
+       b = a;
+       c = b;
+       d = c;
+       return d;
+    }
+
+    public int anotherOne() {
+        int a; // 1
+        int b; // 2
+        int c; // 1
+        int d; // 0
+        int e; // 0
+
+
+
+        b = 2;
+        c = 3;
+        e = 5;
+
+        a = b * c;
+        d = b * b + e;
+        e = a + d;
+
+        return 0;
+    }
+}

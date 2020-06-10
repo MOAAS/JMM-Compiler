@@ -1,0 +1,6 @@
+Error: If expression is not a boolean. Found: int at line 7, column 12.
+Error: Assignment of different types. Can't assign int to boolean at line 10, column 9.
+Error: Right operand of + is not an int. Found: boolean at line 11, column 17.
+Error: While expression is not a boolean. Found: int at line 13, column 15.
+Error: Invalid return expression. Required: int, Provided: boolean at line 17, column 16.
+Error: Invalid return expression. Required: int, Provided: boolean at line 21, column 16.

@@ -1,0 +1,49 @@
+import static io.println(int);
+import static io.println(boolean);
+
+class Simple {
+	int global;
+	Simple simple2;
+
+	public static void main(String[] args) {
+		int a;
+		int b;
+		Simple simple;
+		int c;
+
+		a = 30;
+		b = 0-10;
+		a = a + 30;
+		simple = new Simple();
+		c = simple.add(a,b);
+		simple.func1(a, b);
+		io.println(c);
+		io.println(true);
+	}
+
+	public int add(int a, int b){
+		return a+b;
+	}
+
+	public int func1(int a, int b){
+		global = a - b;
+    	simple2 = new Simple();
+	    this.func2();
+		return 0;
+	}
+
+	public int func2(){
+		io.println(12000);
+		io.println(global);
+		io.println(simple2.add(10, 20));
+		io.println(12000);
+		return 0;
+	}
+
+		/*
+	public int test(int a, int b){
+		return 455 + 20 * (10 * 20 - 42 / 3) - 1;
+	}
+	*/
+
+}

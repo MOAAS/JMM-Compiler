@@ -1,0 +1,63 @@
+import static io.println(int) void;
+import static io.println(int) boolean;
+
+import Quicksort;
+import static Quicksort.do;
+
+class Simple extends Quicksort {
+    int simpleVar;
+    int verySimpleVar;
+
+
+    public static void main(String[] arg){
+        int a;
+        int b;
+        Simple simple;
+        Simple io;
+        int c;
+        a = 30;
+        b = 0-10;
+        simple = new Simple();
+        io = new Simple();
+
+        simple.add(c, d);
+
+        a = 1 + simple.getBool();
+        a = verySimpleVar;
+        verySimpleVar = 3;
+
+        a.add(1,2);
+
+        c = person.getCar(simple.func0()).getLicense(noSymbol1.func1().func2(noSymbol2), simple.func3(), new Simple().length).getNumber(simple.func4(a, b));
+
+        simpleVar = true;
+
+        io.println(c);
+        Simple.add(1, 2, 3);
+        Simple.add(1, 2);
+        io.simple1(Simple);
+        io.quicksort1(Quicksort);
+    }
+
+    public int add(int a, int b){
+        this.do();
+        verySimpleVar = 3;
+        return a + b;
+    }
+
+    public Simple simple1(Simple s) {
+        return Simple;
+    }
+
+    public Quicksort quicksort1(Quicksort s) {
+        return Quicksort;
+    }
+
+    public int println() {
+        return true;
+    }
+
+    public boolean getBool() {
+        return true;
+    }
+}

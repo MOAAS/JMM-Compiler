@@ -1,0 +1,24 @@
+Parse Error found on while expression: line 10, column 23.
+Error Details:
+	The expression is missing a closing bracket ']'
+
+Parse Error found on while expression: line 14, column 21.
+Error Details:
+	The expression is missing a ')' at the end.
+
+Parse Error found on while expression: line 18, column 15.
+Error Details:
+	The expression cannot be empty.
+
+Parse Error found on while expression: line 22, column 15.
+Error Details:
+	The expression is missing a '(' after the while keyword.
+
+Parse Error found on while expression: line 23, column 28.
+Error Details:
+	The expression is missing an argument after the operator "&&"
+
+Parse Error found on while expression: line 27, column 21.
+Error Details:
+	The expression is missing an argument before the operator "<"
+

@@ -1,0 +1,52 @@
+import io.println(int);
+import io.println(int, int) void;
+import io.println(int, int, int) void;
+import io.println(int, int, boolean) void;
+import io.println(int) boolean;
+import io.println(int);
+import io.println(int) int;
+
+import Quicksort;
+import Quicksort;
+
+import static Package;
+import static Package(int, boolean);
+
+import Package int;
+import Package(int, boolean) int;
+
+class Simple {
+    public static void main(String[] arg){
+        Simple simple;
+        simple = new Simple();
+        simple.add(1, 2);
+    }
+
+    public int add(int a, int b) {
+        return a + b;
+    }
+
+    public int add(int a, boolean a, int[] a) {
+        return a + b;
+    }
+
+    public int add(int a, boolean a, int[] a) {
+        return a + b;
+    }
+
+    public boolean add(int a, int b, int c) {
+        return a + b;
+    }
+
+    public int add(int a, int b) {
+        return a + b;
+    }
+
+    public boolean add(int a, int b) {
+        return a + b;
+    }
+
+    public int[] add(int a, int b) {
+        return a + b;
+    }
+ }

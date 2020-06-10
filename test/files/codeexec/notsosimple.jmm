@@ -1,0 +1,84 @@
+import io;
+import static io.println(int);
+import static io.println(boolean);
+
+class Simple extends io {
+	int global;
+	Simple simple2;
+	boolean globalbool;
+
+	public static void main(String[] args) {
+		int a;
+		int b;
+		Simple simple;
+		int c;
+		boolean d;
+		int[] e;
+
+		a = 30;
+		b = 0-10;
+		simple = new Simple();
+		c = simple.add(a,b);
+		simple.self().func1(a, b); // 12000 40 30 12000 1
+		io.println(c); // 20
+		d = !!!!true && !false && !(simple.self().add(3, 21) < 24) && !!!false;
+		e = new int[50];
+		e[simple.add(a,b) + 2] = 20;
+		e[simple.add(a,b) + 5] = 50;
+		io.println(d); // 1
+		io.println(e[simple.add(a,b) + 4 / 2]); // 20
+		io.println(e[25]); // 50
+		io.println(e[25] < 51); // 1
+		io.println(e[25] < 50); // 0
+		Simple.println(e.length + 3 / 2); // 51
+		Simple.println(simple.return4174()); // 4174
+		simple.print(simple.return4174()); // 4174
+		simple.print(simple.newArray(20).length); // 20
+		simple.print(simple.newArrayWithElementSet(20, 2, 10)[2]); // 10
+	}
+
+	public Simple self() {
+		return this;
+	}
+
+	public int print(int num) {
+		io.println(num);
+		return 0;
+	}
+
+	public int[] newArray(int size) {
+		return new int[size];
+	}
+
+	public int[] newArrayWithElementSet(int size, int index, int value) {
+		int[] array;
+		array = this.newArray(size);
+		array[index] = value;
+		return array;
+	}
+
+	public int add(int a, int b){
+		return a+b;
+	}
+
+	public int func1(int a, int b){
+		global = a - b;
+    	simple2 = new Simple();
+		globalbool = 1 < 2 && 2 < 3 && !(2 * 4 + 1 < 9);
+	    this.func2();
+		return 0;
+	}
+
+	public int func2(){
+		io.println(12000);
+		io.println(global);
+		io.println(simple2.add(10, 20));
+		io.println(12000);
+		io.println(globalbool);
+		return 0;
+	}
+
+	public int return4174(){
+		return 455 + 20 * (10 * 20 - 42 / 3) - 1;
+	}
+}

@@ -1,0 +1,42 @@
+
+class TestStack {
+
+	public static void main(String[] args) {
+		int a;
+		int b;
+		int c;
+		int d;
+		boolean x;
+		boolean y;
+		boolean z;
+		a = 2;
+		c = 5;
+		b = a + 1;
+		b = c + a;
+		x = true;
+        y = x;
+
+        if (a < c) {
+
+        }
+        else { x = true; y = true; z = false; }
+
+		if(a < b){
+		   a = 2;
+		   c = 5;
+		}else{
+           a = 2;
+           c = 3;
+		}
+		b = a + c;
+		a = 1;
+		b = 2;
+		while(a < b){
+            d = 1;
+            c = d;
+            c = a;
+            a = a + 1;
+		}
+		a = d;
+	}
+}

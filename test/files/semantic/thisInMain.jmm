@@ -1,0 +1,29 @@
+import io.println(int) void;
+import Quicksort;
+
+class Simple extends Quicksort{
+    int simpleVar;
+    int verySimpleVar;
+
+
+    public static void main(String[] arg){
+        int a;
+        int b;
+        boolean c;
+        int[] d;
+        d = new int[3];
+        c = false;
+        a = 2 + this.getInt();
+        b= 3;
+        if (!(this.getInt() < 3) && this.getBool())
+         a = 1;
+        else b = 1;
+    }
+
+    public int getInt(){
+      return 3;
+    }
+    public boolean getBool(){
+      return true;
+    }
+ }

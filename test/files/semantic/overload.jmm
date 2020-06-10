@@ -1,0 +1,31 @@
+import Quicksort;
+import Quicksort.foo(int);
+
+class Simple extends Quicksort {
+    public static void main(String[] arg){
+        Simple simple;
+        simple = new Simple();
+        simple.foo(1);
+        simple.foo(1, 1);
+        simple.foo(true, 1);
+        simple.foo(1, true);
+        simple.foo(true);
+        simple.foo(simple);
+
+
+    }
+
+    public int foo(boolean a){
+       this.foo(10);
+       this.foo(true);
+       return 1;
+    }
+
+    public int foo(Simple a){
+       return 1;
+    }
+
+    public int foo(boolean a, int b){
+       return 1;
+    }
+}

@@ -1,0 +1,3 @@
+Warning: Division by zero at line 21, column 17.
+Warning: While expression will always be true at line 3, column 15.
+Warning: While expression will always be false at line 7, column 15.

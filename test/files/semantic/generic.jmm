@@ -1,0 +1,24 @@
+class Simple {
+    public int fun(int a, int b) {
+        boolean c;
+        Simple s;
+        s = new Simple();
+
+        if (a + b)
+            c = true && false;
+        else c = false;
+        c = 5;
+        a = 4 + c;
+
+        while (s.ok(1,2)) {
+            c = false;
+        }
+
+        return c;
+    }
+
+    public int ok(int a, int b) {
+        return true;
+    }
+
+ }
